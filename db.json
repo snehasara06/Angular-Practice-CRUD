@@ -1,18 +1,34 @@
 {
   "posts": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
+      "studentId": "101",
+      "studentName": "sneha",
+      "studentEmail": "sneha.sara.06@gmail.com",
+      "studentMobile": "9080195943",
+      "studentDept": "IT",
+      "studentYear": "4th year",
+      "id": 1
+    },
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "studentId": "101",
+      "studentName": "sneha",
+      "studentEmail": "sneha.sara.06@gmail.com",
+      "studentMobile": "9080195943",
+      "studentDept": "IT",
+      "studentYear": "3rd year",
+      "id": 2
+    },
+    {
+      "studentId": "101",
+      "studentName": "snehasara",
+      "studentEmail": "sneha.sara.06@gmail.com",
+      "studentMobile": "9080195943",
+      "studentDept": "IT",
+      "studentYear": "4th year",
+      "id": 3
     }
   ],
+  "comments": [],
   "profile": {
     "name": "typicode"
   }

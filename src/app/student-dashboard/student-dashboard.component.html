@@ -1,94 +1,103 @@
-<!-- <p>student-dashboard works!</p> -->
 <!-- <nav class="navbar navbar-light bg-primary"> -->
-    <nav class="navbar navbar-light" style="background-color:#e3f2fd">
-    <div class="container-fluid">
-        <h3 style="color:darkturquoise;">Angular CRUD-Student Database</h3>
-        <div class="d-flex">
-            <!-- <button class="btn btn-info">Add Student</button> -->
-            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="model" data-bs-target=""></button> -->
-            <!-- <button  data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-info">
-                Add employee
-              </button> -->
-              <button type="button" class="btn btn-info btn-lg" (click)="openModal()">Add Student</button>
-
-        </div>
+<nav class="navbar navbar-light" style="background-color:#e3f2fd">
+  <div class="container-fluid">
+    <h3 style="color:darkturquoise;">Angular CRUD-Student Database</h3>
+    <div class="d-flex">
+      <button type="button" class="btn btn-info btn-lg" (click)="openModal()" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Student</button>
     </div>
+  </div>
 </nav>
 <table class="table mt-5">
-    <thead>
-        <th scope="col">Student ID</th>
-        <th scope="col">Student Name</th>
-        <th scope="col">Email ID</th>
-        <th scope="col">Mobile No</th>
-        <th scope="col">Department</th>
-        <th scope="col">Year</th>
-    </thead>
-    <tbody>
-        <tr>
-            <td>101</td>
+  <thead>
+    <th scope="col">Student ID</th>
+    <th scope="col">Student Name</th>
+    <th scope="col">Email ID</th>
+    <th scope="col">Mobile No</th>
+    <th scope="col">Department</th>
+    <th scope="col">Year</th>
+    <th scope="col">Operation</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of studentData">
+      <td>{{row.studentId}}</td>
+      <td>{{row.studentName}}</td>
+      <td>{{row.studentEmail}}</td>
+      <td>{{row.studentMobile}}</td>
+      <td>{{row.studentDept}}</td>
+      <td>{{row.studentYear}}</td>      
+      <!-- <td>101</td>
             <td>Sneha</td>
             <td>sneha.sara.06@gmail.com</td>
             <td>9080195943</td>
             <td>Information Technology</td>
-            <td>IV</td>
-<td>
-    <button class="btn btn-info">Edit</button>
-    <button class="btn btn-danger mx-3">Delete</button>
-</td>
-
-        </tr>
-    </tbody>
+            <td>IV</td> -->
+      <td>
+        <!-- <input type="button" value="Edit" (click)="editStudent(row)" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success me-2" /> -->
+        <button (click)="editStudent(row);openModal()" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
+        <button (click)="deleteStu(row)" class="btn btn-danger mx-3">Delete</button>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
-    <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
-         <div class="modal-dialog" role="document">
-               <div class="modal-content">
-                     <div class="modal-header">
-                           <h4 class="modal-title">Student Details</h4>
-                           <!-- <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button> -->
-                           <button type="button" class="btn-close btn-close-black" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true"></span></button>
-
-                         </div>
-                <div class="modal-body">
-                           <!-- Adding the form for  -->
-                           <form [formGroup]="formValue">
-                            <div class="form-group">
-                              <label for="exampleInputEmail1">Student ID</label>
-                              <input type="text" formControlName="studentId" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Student ID">
-                              <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-                            </div>
-                            <div class="form-group">
-                              <label for="exampleInputPassword1"> Name</label>
-                              <input type="text" formControlName=" studentName" class="form-control" id="exampleInputPassword1" placeholder=" Name">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Email ID</label>
-                                <input type="email"  formControlName="studentEmail" class="form-control" id="exampleInputPassword1" placeholder="Email ID">
-                              </div>
-                              <div class="form-group">
-                                <label for="exampleInputPassword1">Mobile No</label>
-                                <input type="tel" formControlName="studentMobile" class="form-control" id="exampleInputPassword1" placeholder="Mobile Number">
-                              </div>
-                              <div class="form-group">
-                                <label for="exampleInputPassword1">Department</label>
-                                <input type="text" formControlName="studentDept" class="form-control" id="exampleInputPassword1" placeholder="Department">
-                              </div>
-                              <div class="form-group">
-                                <label for="exampleInputPassword1">Year</label>
-                                <input type="text" formControlName="studentYear" class="form-control" id="exampleInputPassword1" placeholder="Year of studying">
-                              </div>
-                            <!-- <div class="form-check">
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}" id="exampleModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Student Details</h4>
+        <!-- <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button> -->
+        <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal" aria-label="Close"
+          (click)="onCloseHandled()"><span aria-hidden="true"></span></button>
+      </div>
+      <div class="modal-body">
+        <!-- Adding the form for  -->
+        <form [formGroup]="formValue" class="row g-3">
+          <!-- <div class="form-group">
+            <label for="exampleInputEmail1">Student ID</label>
+            <input type="text" formControlName="studentId" class="form-control" id="exampleInputEmail1"
+              aria-describedby="emailHelp" placeholder="Student ID"> -->
+            <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+          <!-- </div> -->
+          <div class="form-group">
+            <label for="exampleInputPassword1"> Name</label>
+            <input type="text" formControlName="studentName" class="form-control" id="exampleInputPassword1"
+              placeholder="Name">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Email ID</label>
+            <input type="email" formControlName="studentEmail" class="form-control" id="exampleInputPassword1"
+              placeholder="Email ID">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Mobile No</label>
+            <input type="tel" formControlName="studentMobile" class="form-control" id="exampleInputPassword1"
+              placeholder="Mobile Number">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Department</label>
+            <input type="text" formControlName="studentDept" class="form-control" id="exampleInputPassword1"
+              placeholder="Department">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Year</label>
+            <input type="text" formControlName="studentYear" class="form-control" id="exampleInputPassword1"
+              placeholder="Year of studying">
+          </div>
+          <!-- <div class="form-check">
                               <input type="checkbox" class="form-check-input" id="exampleCheck1">
                               <label class="form-check-label" for="exampleCheck1">Check me out</label>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button> -->
-                          </form>
-                         </div>
-                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onCloseHandled()">Close</button>
-                        <button type="button" class="btn btn-info" (click)="postStudentData()">Add</button>
-                           <!-- <button type="button" class="btn btn-default" (click)="onCloseHandled()" >Close</button> -->
-                         </div>
-            </div>
-             </div>
- </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal"
+          (click)="onCloseHandled()">Close</button>
+        <button type="button" *ngIf="btnSaveShow" (click)="addStudentData()" class="btn btn-info">Add</button>
+        <button *ngIf="btnUpdateShow" type="button" class="btn btn-primary" (click)="updateStu()">Update</button>
+
+        <!-- <button type="button" class="btn btn-default" (click)="onCloseHandled()" >Close</button> -->
+      </div>
+    </div>
+  </div>
+</div>
